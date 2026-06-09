@@ -1,6 +1,6 @@
 # 🍔 McDonald's Website Clone — I'm Lovin' It
 
-> Live site: [pallab-chakraborty.github.io/McDonald-s-Website](https://pallab-chakraborty.github.io/McDonald-s-Website/)
+> Live site:[pallab-chakraborty.github.io/McDonald-s-Website](https://pallab-chakraborty.github.io/McDonald-s-Website/)](https://pallab-chakraborty.github.io/McDonald-s-Website-Demo/)
 
 A pixel-faithful, fully interactive McDonald's website clone built with pure HTML, CSS, and JavaScript. Features an AI-powered ordering assistant, live cart system, multi-step checkout, real-time order tracking, and a complete menu — all without any backend or framework.
 
