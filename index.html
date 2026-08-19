@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>McDonald's — I'm Lovin' It</title>
+<meta name="description" content="A pixel-faithful, fully interactive McDonald's website clone with a live cart, multi-step checkout, order tracking, and an AI-ordering-assistant demo — pure HTML, CSS, and JavaScript.">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a class="nav-logo" href="#">
+    <span class="arch">M</span>
+    <span>McDonald's</span>
+  </a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#menu">Menu</a>
+      <a href="#deals">Deals</a>
+      <a href="#how">How It Works</a>
+      <a href="#app">App</a>
+      <a href="#menu" class="nav-order-btn">Order Now 🍔</a>
+    </div>
+    <button class="nav-cart-btn" onclick="openCart()">
+      🛒<span class="cart-badge" id="navBadge">0</span>
+    </button>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-badge"><div class="dot"></div><span>Now Ordering Near You</span></div>
+      <h1 class="hero-title">I'M<br><span class="yellow">LOVIN'</span><br>IT</h1>
+      <p class="hero-subtitle">Freshly made, fast delivered. Order your favourite McDonald's meals and get them at your door in under 30 minutes.</p>
+      <div class="hero-ctas">
+        <a href="#menu" class="btn-primary">🍟 Order Now</a>
+        <a href="#deals" class="btn-secondary">🎁 See Deals</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="num">40K+</div><div class="label">Restaurants</div></div>
+        <div class="hero-stat"><div class="num">4.9★</div><div class="label">App Rating</div></div>
+        <div class="hero-stat"><div class="num">&lt;30m</div><div class="label">Delivery</div></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-burger-wrap">
+        <div class="hero-glow"></div>
+        <div class="burger-emoji">🍔</div>
+        <div class="hero-badge-float one"><span class="badge-icon">⚡</span><div><div class="badge-text">Express Order</div><div class="badge-sub">Ready in 8 min</div></div></div>
+        <div class="hero-badge-float two"><span class="badge-icon">🎁</span><div><div class="badge-text">2-for-1 Today</div><div class="badge-sub">App exclusive</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item"><span class="ticker-dot"></span> Big Mac Combo from ₹249</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> McDelivery in 30 min</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Happy Meal — Kids Love It</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> McFlurry New Flavours</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Download App — Exclusive Deals</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> McCafé — Every Morning ☕</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Big Mac Combo from ₹249</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> McDelivery in 30 min</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Happy Meal — Kids Love It</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> McFlurry New Flavours</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Download App — Exclusive Deals</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> McCafé — Every Morning ☕</span>
+  </div>
+</div>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="container">
+    <div class="menu-header">
+      <div>
+        <div class="section-tag"><span>🍔 Our Menu</span></div>
+        <h2 class="section-title">PICK YOUR <span class="accent">FAVOURITE</span></h2>
+        <p class="section-sub">Freshly made with quality ingredients. Over 100 items to choose from.</p>
+      </div>
+      <button class="btn-primary" onclick="openCart()">🛒 View Cart</button>
+    </div>
+    <div class="menu-cats">
+      <button class="cat-btn active" onclick="filterCat(this,'all')">All</button>
+      <button class="cat-btn" onclick="filterCat(this,'burgers')">🍔 Burgers</button>
+      <button class="cat-btn" onclick="filterCat(this,'sides')">🍟 Sides</button>
+      <button class="cat-btn" onclick="filterCat(this,'drinks')">🥤 Drinks</button>
+      <button class="cat-btn" onclick="filterCat(this,'desserts')">🍦 Desserts</button>
+      <button class="cat-btn" onclick="filterCat(this,'breakfast')">🥞 Breakfast</button>
+      <button class="cat-btn" onclick="filterCat(this,'mccafe')">☕ McCafé</button>
+    </div>
+    <div class="menu-grid" id="menuGrid"></div>
+  </div>
+</section>
+
+<!-- DEALS -->
+<section class="deals-section" id="deals">
+  <div class="container">
+    <div class="section-tag" style="background:rgba(255,199,44,0.1);border-color:rgba(255,199,44,0.2)"><span style="color:var(--yellow)">🎁 Today's Deals</span></div>
+    <h2 class="section-title" style="color:white">UNBEATABLE <span style="color:var(--yellow)">OFFERS</span></h2>
+    <p class="section-sub" style="color:rgba(255,255,255,0.55);margin-bottom:48px">Limited time. Maximum value. Grab them before they're gone.</p>
+    <div class="deals-grid">
+      <div class="deal-card big" onclick="addToCart('McDouble Combo',299,'🍔')">
+        <div class="deal-card-bg deal-bg-1"></div>
+        <div class="deal-emoji">🍔</div>
+        <div class="deal-body">
+          <div class="deal-tag">🔥 Best Seller</div>
+          <div class="deal-title">McDouble<br>Combo Deal</div>
+          <div class="deal-desc">2 burgers + large fries + large drink</div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+            <span style="font-family:'Bebas Neue';font-size:42px;color:var(--yellow)">₹299</span>
+            <span style="font-size:16px;color:rgba(255,255,255,0.5);text-decoration:line-through;font-weight:700">₹450</span>
+          </div>
+          <button class="deal-btn deal-btn-light">Order Now →</button>
+        </div>
+      </div>
+      <div class="deal-card" onclick="addToCart('Fries + Drink',99,'🍟')">
+        <div class="deal-card-bg deal-bg-2"></div>
+        <div class="deal-emoji">🍟</div>
+        <div class="deal-body">
+          <div class="deal-tag">⚡ Flash Deal</div>
+          <div class="deal-title">Fries +<br>Any Drink</div>
+          <div class="deal-desc">Large fries with any medium drink</div>
+          <div style="font-family:'Bebas Neue';font-size:36px;color:var(--dark);margin-bottom:16px">₹99</div>
+          <button class="deal-btn deal-btn-dark">Grab It →</button>
+        </div>
+      </div>
+      <div class="deal-card" onclick="addToCart('McFlurry Special',79,'🍦')">
+        <div class="deal-card-bg deal-bg-3"></div>
+        <div class="deal-emoji">🍦</div>
+        <div class="deal-body">
+          <div class="deal-tag">🍦 New Flavour</div>
+          <div class="deal-title">McFlurry<br>Special</div>
+          <div class="deal-desc">New caramel crunch McFlurry</div>
+          <div style="font-family:'Bebas Neue';font-size:36px;color:var(--yellow);margin-bottom:16px">₹79</div>
+          <button class="deal-btn deal-btn-yellow">Try Now →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="container">
+    <div style="text-align:center">
+      <div class="section-tag" style="justify-content:center"><span>How It Works</span></div>
+      <h2 class="section-title">ORDER IN <span class="accent">4 EASY</span> STEPS</h2>
+      <p class="section-sub" style="margin:0 auto;text-align:center">From craving to doorstep — it's that simple.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card"><div class="step-num"><span class="step-icon">📍</span></div><h3 class="step-title">Set Your Location</h3><p class="step-desc">Enter your address and find your nearest McDonald's restaurant with live availability.</p></div>
+      <div class="step-card"><div class="step-num"><span class="step-icon">🍔</span></div><h3 class="step-title">Choose Your Order</h3><p class="step-desc">Browse the full menu with AI-powered meal suggestions personalised for you.</p></div>
+      <div class="step-card"><div class="step-num"><span class="step-icon">💳</span></div><h3 class="step-title">Quick Checkout</h3><p class="step-desc">Pay securely with Google Pay, Apple Pay, card or cash on delivery.</p></div>
+      <div class="step-card"><div class="step-num"><span class="step-icon">🚀</span></div><h3 class="step-title">Track & Enjoy</h3><p class="step-desc">Real-time order tracking right to your door. Sit back and enjoy every bite.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- AI -->
+<section class="ai-section">
+  <div class="container">
+    <div class="ai-grid">
+      <div>
+        <div class="section-tag" style="background:rgba(255,199,44,0.08);border-color:rgba(255,199,44,0.15)"><span style="color:var(--yellow)">✨ Powered by Gemini AI</span></div>
+        <h2 class="section-title" style="color:white">SMARTER <span style="color:var(--yellow)">ORDERING</span><br>WITH AI</h2>
+        <p class="section-sub" style="color:rgba(255,255,255,0.55)">Our Gemini AI engine learns your taste, suggests the perfect meal, and makes every order feel personal.</p>
+        <div class="ai-features">
+          <div class="ai-feat"><div class="ai-feat-icon">🤖</div><div class="ai-feat-title">Conversational Ordering</div><div class="ai-feat-desc">Chat with AI to build your perfect meal in seconds</div></div>
+          <div class="ai-feat"><div class="ai-feat-icon">🎯</div><div class="ai-feat-title">Personalised For You</div><div class="ai-feat-desc">Smart suggestions based on your order history & preferences</div></div>
+          <div class="ai-feat"><div class="ai-feat-icon">🔍</div><div class="ai-feat-title">Smart Menu Search</div><div class="ai-feat-desc">Natural language search — just say what you're craving</div></div>
+          <div class="ai-feat"><div class="ai-feat-icon">🥗</div><div class="ai-feat-title">Dietary Intelligence</div><div class="ai-feat-desc">Filters for vegan, gluten-free, calorie goals and more</div></div>
+        </div>
+      </div>
+      <div class="ai-visual">
+        <div class="ai-ring"></div><div class="ai-ring"></div><div class="ai-ring"></div>
+        <div class="ai-phone">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="phone-header"><div style="font-size:10px;color:rgba(255,255,255,0.6);font-weight:800;letter-spacing:1px;margin-bottom:2px">AI ASSISTANT</div><div class="phone-header-title">🤖 McBot</div></div>
+            <div style="padding:16px 0">
+              <div class="chat-bubble chat-user">I want something spicy with a cold drink 🌶️</div>
+              <div class="chat-bubble chat-ai"><div class="chat-ai-label">MCBOT AI</div>Perfect! Try the 🌶️ Spicy McChicken + Large Coke. I'll add a McFlurry as a cool-down treat. Total: ₹349 🎉</div>
+              <div class="chat-bubble chat-user">Yes! Add fries too</div>
+              <div class="chat-bubble chat-ai"><div class="chat-ai-label">MCBOT AI</div>Done! ✅ Spicy McChicken + Large Fries + Large Coke + McFlurry. Total: ₹428</div>
+              <div class="phone-order-btn">🛒 Confirm Order — ₹428</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <div style="text-align:center">
+      <div class="section-tag" style="justify-content:center"><span>⭐ Customer Love</span></div>
+      <h2 class="section-title">WHAT PEOPLE <span class="accent">SAY</span></h2>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">"The AI assistant literally read my mind. Suggested a spicy burger combo and I was already thinking of it. Delivered in 22 minutes. McDonald's just gets better and better!"</p><div class="review-author"><div class="review-avatar">👩</div><div><div class="review-name">Priya Sharma</div><div class="review-handle">@priya_eats • Delhi</div></div></div></div>
+      <div class="review-card" style="background:#FFFAF0;border-color:#FFE599"><div class="review-stars">★★★★★</div><p class="review-text">"Ordered for my kids and the Happy Meal customisation is brilliant. The app is super fast, checkout is one tap with Google Pay, and tracking was real-time. 10/10."</p><div class="review-author"><div class="review-avatar">👨</div><div><div class="review-name">Rahul Mehta</div><div class="review-handle">@rahulmehta • Mumbai</div></div></div></div>
+      <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">"Best fast food website I've used. The deals section alone saves me ₹200 every order. The McFlurry deal was an absolute steal. Love the new design and speed!"</p><div class="review-author"><div class="review-avatar">👩‍💻</div><div><div class="review-name">Ananya Reddy</div><div class="review-handle">@ananya_r • Bangalore</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- APP -->
+<section class="app-section" id="app">
+  <div class="container">
+    <div class="app-grid">
+      <div>
+        <div class="section-tag"><span>📱 The App</span></div>
+        <h2 class="section-title">ORDER SMARTER<br>WITH THE APP</h2>
+        <p class="section-sub">Get exclusive app-only deals, track your order live, earn MyMcDonald's rewards, and reorder your favourites in one tap.</p>
+        <div class="app-perks">
+          <div class="app-perk"><div class="perk-check">✓</div><div class="perk-text">Exclusive app-only deals every day</div></div>
+          <div class="app-perk"><div class="perk-check">✓</div><div class="perk-text">Earn loyalty points on every order</div></div>
+          <div class="app-perk"><div class="perk-check">✓</div><div class="perk-text">Real-time order tracking</div></div>
+          <div class="app-perk"><div class="perk-check">✓</div><div class="perk-text">One-tap reorder your favourites</div></div>
+        </div>
+        <div class="app-buttons">
+          <a href="#" class="store-btn"><span class="store-icon">🍎</span><div class="store-text"><small>DOWNLOAD ON THE</small><strong>App Store</strong></div></a>
+          <a href="#" class="store-btn"><span class="store-icon">▶</span><div class="store-text"><small>GET IT ON</small><strong>Google Play</strong></div></a>
+        </div>
+      </div>
+      <div class="app-phones">
+        <div class="app-phone-mock"><div style="background:#0D0D0D;padding:10px;text-align:center"><div style="width:60px;height:6px;background:#333;border-radius:3px;margin:0 auto"></div></div><div class="app-phone-screen"><div class="app-screen-hero"><div class="tiny">GOOD EVENING</div><div class="big">What's your order?</div><div class="emoji">🍔</div></div><div class="app-item"><span class="app-item-icon">🍔</span><span class="app-item-name">Big Mac</span><span class="app-item-price">₹199</span></div><div class="app-item"><span class="app-item-icon">🍟</span><span class="app-item-name">Large Fries</span><span class="app-item-price">₹99</span></div></div></div>
+        <div class="app-phone-mock"><div style="background:#0D0D0D;padding:10px;text-align:center"><div style="width:60px;height:6px;background:#333;border-radius:3px;margin:0 auto"></div></div><div class="app-phone-screen"><div class="app-screen-hero" style="background:var(--yellow)"><div class="tiny" style="color:rgba(0,0,0,0.5)">TODAY'S DEAL</div><div class="big" style="color:var(--dark)">2-for-1 🔥</div><div class="emoji">🎁</div></div><div style="padding:10px 0"><div style="background:rgba(255,199,44,0.1);border-radius:14px;padding:14px;text-align:center;margin-top:8px"><div style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--yellow)">1,240</div><div style="font-size:12px;font-weight:800;color:rgba(255,255,255,0.5)">LOYALTY POINTS</div></div></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><div class="arch">M</div><p>Over 40,000 restaurants worldwide. Quality food, fast service, and a smile — every single time.</p><div class="footer-socials" style="margin-top:24px"><div class="social-btn">📘</div><div class="social-btn">📸</div><div class="social-btn">🐦</div><div class="social-btn">▶</div></div></div>
+    <div class="footer-col"><h4>Our Menu</h4><a href="#">Burgers</a><a href="#">Chicken & Fish</a><a href="#">Sides & Extras</a><a href="#">Desserts</a><a href="#">McCafé</a></div>
+    <div class="footer-col"><h4>Company</h4><a href="#">About Us</a><a href="#">Sustainability</a><a href="#">Newsroom</a><a href="#">Careers</a></div>
+    <div class="footer-col"><h4>Support</h4><a href="#">Find a Restaurant</a><a href="#">Contact Us</a><a href="#">Allergen Info</a><a href="#">Privacy Policy</a></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 McDonald's Corporation. All rights reserved.</p>
+    <p style="color:rgba(255,255,255,0.3);font-size:12px">Built with Google AI Studio · Powered by Gemini Pro</p>
+  </div>
+</footer>
+
+<!-- STICKY ORDER BAR -->
+<div class="order-bar" id="orderBar">
+  <div class="order-bar-left">
+    <span class="order-bar-icon">🍟</span>
+    <div class="order-bar-text"><strong>Ready to order?</strong><span>Delivery in under 30 minutes</span></div>
+  </div>
+  <button class="order-bar-btn" onclick="openCart()">View Cart 🛒</button>
+</div>
+
+<!-- MINI TOAST -->
+<div class="mini-toast" id="miniToast"></div>
+
+<!-- CART OVERLAY -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+<!-- ════════════════════════════════════════════
+     CART SIDEBAR
+════════════════════════════════════════════ -->
+<div class="cart-sidebar" id="cartSidebar">
+
+  <!-- Header -->
+  <div class="cart-hdr">
+    <div class="cart-hdr-left">
+      <span style="font-size:24px">🛒</span>
+      <span class="cart-hdr-title" id="cartTitle">Your Cart</span>
+      <span class="cart-hdr-count" id="cartCount">0 items</span>
+    </div>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+
+  <!-- Steps -->
+  <div class="cart-steps" id="stepBar">
+    <div class="c-step active" id="st1"><span class="sn">1</span>Cart</div>
+    <div class="c-step" id="st2"><span class="sn">2</span>Delivery</div>
+    <div class="c-step" id="st3"><span class="sn">3</span>Payment</div>
+    <div class="c-step" id="st4"><span class="sn">✓</span>Done!</div>
+  </div>
+
+  <!-- Panels -->
+  <div class="cart-body">
+
+    <!-- Panel 1: Cart Items -->
+    <div class="c-panel active" id="p1">
+      <div id="itemsWrap"></div>
+      <div id="upsellWrap"></div>
+      <div class="promo-row">
+        <input class="promo-inp" id="promoInp" type="text" placeholder="Promo / gift code (try MCDS30)">
+        <button class="promo-go" onclick="applyPromo()">Apply</button>
+      </div>
+      <div class="promo-ok" id="promoOk">🎉 ₹30 discount applied!</div>
+    </div>
+
+    <!-- Panel 2: Delivery -->
+    <div class="c-panel" id="p2">
+      <button class="back-btn" onclick="goStep(1)">← Back to Cart</button>
+      <div class="fsec">Delivery Method</div>
+      <div class="d-type">
+        <button class="d-btn sel" id="dBtn" onclick="setDelivery('delivery')"><span class="di">🛵</span><span class="dn">Delivery</span><span class="de">~25–35 min</span></button>
+        <button class="d-btn" id="pBtn" onclick="setDelivery('pickup')"><span class="di">🏪</span><span class="dn">Pickup</span><span class="de">~10–15 min</span></button>
+      </div>
+      <div id="dFields">
+        <div class="fsec">Delivery Address</div>
+        <div class="f-row">
+          <div class="fg"><label>First Name</label><input class="fi" type="text" placeholder="Rahul"></div>
+          <div class="fg"><label>Last Name</label><input class="fi" type="text" placeholder="Sharma"></div>
+        </div>
+        <div class="fg"><label>Phone Number</label><input class="fi" type="tel" placeholder="+91 98765 43210"></div>
+        <div class="fg"><label>Street Address</label><input class="fi" type="text" placeholder="Flat 4B, Sunshine Apartments"></div>
+        <div class="f-row">
+          <div class="fg"><label>City</label><input class="fi" type="text" placeholder="Delhi"></div>
+          <div class="fg"><label>PIN Code</label><input class="fi" type="text" placeholder="110001"></div>
+        </div>
+      </div>
+      <div id="pFields" style="display:none">
+        <div class="fsec">Pickup Details</div>
+        <div class="fg"><label>Your Name</label><input class="fi" type="text" placeholder="Rahul Sharma"></div>
+        <div class="fg"><label>Phone</label><input class="fi" type="tel" placeholder="+91 98765 43210"></div>
+        <div class="fg"><label>Nearest Restaurant</label>
+          <select class="fi">
+            <option>Connaught Place, New Delhi</option>
+            <option>Andheri West, Mumbai</option>
+            <option>Koramangala, Bangalore</option>
+            <option>Salt Lake, Kolkata</option>
+          </select>
+        </div>
+      </div>
+      <div class="fg"><label>Delivery Note (optional)</label><input class="fi" type="text" placeholder="Ring bell twice, leave at door..."></div>
+    </div>
+
+    <!-- Panel 3: Payment -->
+    <div class="c-panel" id="p3">
+      <button class="back-btn" onclick="goStep(2)">← Back to Delivery</button>
+      <div class="fsec">Choose Payment</div>
+      <div class="pay-grid">
+        <button class="pm sel" onclick="setPay(this,'card')"><span class="pm-icon">💳</span><div><div class="pm-label">Card</div><div class="pm-sub">Visa / Mastercard / RuPay</div></div></button>
+        <button class="pm" onclick="setPay(this,'gpay')"><span class="pm-icon">📱</span><div><div class="pm-label">Google Pay</div><div class="pm-sub">Fast & secure</div></div></button>
+        <button class="pm" onclick="setPay(this,'upi')"><span class="pm-icon">⚡</span><div><div class="pm-label">UPI</div><div class="pm-sub">PhonePe · Paytm · BHIM</div></div></button>
+        <button class="pm" onclick="setPay(this,'cod')"><span class="pm-icon">💵</span><div><div class="pm-label">Cash on Delivery</div><div class="pm-sub">Pay when it arrives</div></div></button>
+      </div>
+
+      <div id="cardBox" class="pay-box">
+        <div class="pay-box-title">Card Details</div>
+        <div class="fg"><label>Name on Card</label><input class="fi" type="text" placeholder="RAHUL SHARMA"></div>
+        <div class="fg"><label>Card Number</label><input class="fi" type="text" placeholder="1234  5678  9012  3456" maxlength="19" oninput="fmtCard(this)"></div>
+        <div class="f-row">
+          <div class="fg"><label>Expiry</label><input class="fi" type="text" placeholder="MM / YY" maxlength="7" oninput="fmtExp(this)"></div>
+          <div class="fg"><label>CVV</label><input class="fi" type="password" placeholder="•••" maxlength="3"></div>
+        </div>
+      </div>
+      <div id="upiBox" class="pay-box" style="display:none">
+        <div class="pay-box-title">UPI ID</div>
+        <div class="fg"><label>Your UPI ID</label><input class="fi" type="text" placeholder="yourname@upi"></div>
+      </div>
+      <div id="gpayBox" class="pay-box gpay-box" style="display:none">
+        <div class="gi">📱</div>
+        <strong>Pay with Google Pay</strong>
+        <p>You'll confirm the payment in the Google Pay app</p>
+      </div>
+      <div id="codBox" class="pay-box" style="display:none">
+        <div style="text-align:center;padding:16px 0">
+          <div style="font-size:48px;margin-bottom:12px">💵</div>
+          <div style="font-weight:900;font-size:15px;color:var(--dark);margin-bottom:6px">Cash on Delivery</div>
+          <div style="font-size:13px;color:#888;font-weight:600">Have exact change ready for the delivery rider</div>
+        </div>
+      </div>
+
+      <div class="ssl-note">
+        <span style="font-size:18px">🔒</span>
+        <span>Secured by 256-bit SSL encryption. We never store your card details.</span>
+      </div>
+    </div>
+
+    <!-- Panel 4: Confirmed -->
+    <div class="c-panel" id="p4">
+      <div class="confirmed-wrap">
+        <div class="check-circle">✓</div>
+        <h2>Order Placed! 🎉</h2>
+        <p>Your McDonald's order is confirmed and being freshly prepared. Estimated delivery in 25–35 minutes.</p>
+        <div class="oid-box"><div class="ol">Order Reference</div><div class="ov" id="orderIdTxt">MCD-000000</div></div>
+        <div class="track-wrap">
+          <div class="track-label-hdr">Live Order Tracking</div>
+          <div class="t-steps">
+            <div class="t-prog" id="tProg"></div>
+            <div class="t-step" id="ts1"><div class="t-dot done">✓</div><div class="t-lbl">Confirmed</div></div>
+            <div class="t-step" id="ts2"><div class="t-dot">🍳</div><div class="t-lbl">Preparing</div></div>
+            <div class="t-step" id="ts3"><div class="t-dot">🛵</div><div class="t-lbl">On the Way</div></div>
+            <div class="t-step" id="ts4"><div class="t-dot">🏠</div><div class="t-lbl">Delivered</div></div>
+          </div>
+        </div>
+        <button class="act-btn" onclick="resetOrder()" style="background:var(--dark);box-shadow:0 8px 24px rgba(0,0,0,0.2)">🍔 Order Again</button>
+      </div>
+    </div>
+
+  </div><!-- end cart-body -->
+
+  <!-- Footer -->
+  <div class="cart-ftr" id="cartFtr">
+    <div class="summary" id="summaryWrap"></div>
+    <button class="act-btn" id="actBtn" onclick="primaryAction()">
+      <span id="actTxt">Proceed to Delivery →</span>
+    </button>
+  </div>
+
+</div>
+
+
+<script src="js/data.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/checkout.js"></script>
+<script src="js/menu.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>
